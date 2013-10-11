@@ -1,12 +1,14 @@
 <?php
 
-class Isbn {
+class Isbn
+{
 
     /**
      * @param string $isbn  a correctly-formatted ISBN10 or 13 (no hyphens)
      * @return boolean      whether $isbn is valid
      */
-    public static function validate($isbn) {
+    public static function validate($isbn)
+    {
         return self::validate10($isbn) || self::validate13($isbn);
     }
 
@@ -14,7 +16,8 @@ class Isbn {
      * @param string $isbn  a correctly-formatted ISBN10 (no hyphens)
      * @return boolean      whether $isbn is valid
      */
-    public static function validate10($isbn) {
+    public static function validate10($isbn)
+    {
         if (strlen($isbn) != 10 || !is_numeric(substr($isbn, 0, 9))) {
             return false;
         }
@@ -28,8 +31,8 @@ class Isbn {
             } else {
                 return false;
             }
-        }   
-        
+        }
+
         return $sum % 11 == 0;
     }
 
@@ -37,7 +40,8 @@ class Isbn {
      * @param string $isbn  a correctly-formatted ISBN13 (no hyphens)
      * @return boolean      whether $isbn is valid
      */
-    public static function validate13($isbn) {
+    public static function validate13($isbn)
+    {
         if (strlen($isbn) != 13 || !is_numeric($isbn)) {
             return false;
         }
@@ -51,10 +55,11 @@ class Isbn {
 
     /**
      * @param string $isbn   an ISBN of any sort in any format
-     * @return false|string  $isbn converted to an ISBN10, or false if $isbn is 
+     * @return false|string  $isbn converted to an ISBN10, or false if $isbn is
      *                       invalid or doesn't have an ISBN10 equivalent.
      */
-    public static function to10($isbn, $validate=false) {
+    public static function to10($isbn, $validate=false)
+    {
         $isbn = self::clean($isbn);
 
         if ($validate && !self::validate($isbn)) {
@@ -68,24 +73,25 @@ class Isbn {
         }
 
         $i = substr($isbn, 3);
-        $sum = $i[0]*1 + $i[1]*2 + $i[2]*3 + $i[3]*4 + $i[4]*5 
+        $sum = $i[0]*1 + $i[1]*2 + $i[2]*3 + $i[3]*4 + $i[4]*5
                        + $i[5]*6 + $i[6]*7 + $i[7]*8 + $i[8]*9;
 
         $check = $sum % 11;
         if ($check == 10) {
             $check = "X";
         }
-        
+
         return substr($isbn, 3, 9) . $check;
 
     }
-    
+
     /**
      * @param string $isbn   an ISBN of any sort in any format
-     * @return false|string  $isbn converted to an ISBN13, or false if $isbn is 
+     * @return false|string  $isbn converted to an ISBN13, or false if $isbn is
      *                       invalid
      */
-    public static function to13($isbn, $validate=false) {
+    public static function to13($isbn, $validate=false)
+    {
         $isbn = self::clean($isbn);
 
         if ($validate && !self::validate($isbn)) {
@@ -114,7 +120,8 @@ class Isbn {
      * @param string $isbn  an ISBN in any format, including whitespace, hyphens, etc.
      * @return string       $isbn with all characters removed except numbers and 'X'
      */
-    public static function clean($isbn) {
+    public static function clean($isbn)
+    {
         return preg_replace("/[^0-9X]+/", '', $isbn);
     }
 
