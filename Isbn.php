@@ -122,7 +122,12 @@ class Isbn
      */
     public static function clean($isbn)
     {
-        return preg_replace("/[^0-9X]+/", '', $isbn);
+        $isbn = preg_replace("/[^0-9X]+/", '', $isbn);
+        if (substr($isbn, 0, 2) == '97') {
+            return substr($isbn, 0, 13);
+        } else {
+            return substr($isbn, 0, 10);
+        }
     }
 
 }

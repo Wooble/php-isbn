@@ -19,6 +19,8 @@ class IsbnText extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('9780671552343', Isbn::clean($this->_uncleanedValidIsbn));
         $this->assertEquals('0671552341', Isbn::to10($this->_uncleanedValidIsbn));
+
+        $this->assertEquals('9780671552343', Isbn::clean($this->_uncleanedValidIsbn . '(Electronic Bk. 2009)'));
     }
 
     public function testNonIsbns()
