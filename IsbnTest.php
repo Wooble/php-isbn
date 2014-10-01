@@ -28,6 +28,7 @@ class IsbnText extends PHPUnit_Framework_TestCase
         $foo = 'foo';
         $bar = 'foofooofoo';
         $foobar = '978barbarbarr';
+        $almost = '123456789P';
 
         $this->assertFalse(Isbn::validate($foo));
         $this->assertFalse(Isbn::to10($foo));
@@ -35,6 +36,7 @@ class IsbnText extends PHPUnit_Framework_TestCase
         $this->assertFalse(Isbn::validate($bar));
         $this->assertFalse(Isbn::to13($bar, true));
         $this->assertFalse(Isbn::validate($foobar));
+        $this->assertFalse(Isbn::validate($almost));
         $this->assertFalse(Isbn::to10($foobar, true));
     }
 
