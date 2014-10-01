@@ -1,7 +1,7 @@
 PHP-Isbn
 =====================
 [![Build Status](https://travis-ci.org/Wooble/php-isbn.svg)](https://travis-ci.org/Wooble/php-isbn)
-
+[![Coverage Status](https://img.shields.io/coveralls/Wooble/php-isbn.svg)](https://coveralls.io/r/Wooble/php-isbn)
 
 - Author: Mike White (<m@mwhite.info>)
 - License: MIT License
